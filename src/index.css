@@ -1,1 +1,36 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-display: 'Cinzel', serif;
+  
+  --color-noir: #050505;
+  --color-paper: #f0f0f0;
+  --color-accent: #b91c1c; /* Deep red for subtle interactions */
+}
+
+/* Custom Scrollbar for Chrome/Safari/Webkit */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-noir);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+body {
+  background-color: var(--color-noir);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-paper);
+  color: var(--color-noir);
+}

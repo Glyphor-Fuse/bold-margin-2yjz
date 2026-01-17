@@ -1,0 +1,693 @@
+diff --git a/index.html b/index.html
+index 59f1d53..2c190d2 100644
+--- a/index.html
++++ b/index.html
+@@ -1,5 +1,15 @@
+-<head>
+-  <meta charset="UTF-8" />
+-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-  <title>Glyphor Fuse Project</title>
+-</head>
++<!DOCTYPE html>
++<html lang="en">
++  <head>
++    <meta charset="UTF-8" />
++    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <title>ÉTHER | High Fashion Editorial</title>
++    <meta name="description" content="Redefining the silhouette of modern luxury. A digital experience by ÉTHER." />
++    <meta name="theme-color" content="#0a0a0a" />
++    <script type="module" src="/src/main.tsx"></script>
++  </head>
++  <body>
++    <div id="root"></div>
++  </body>
++</html>
+\ No newline at end of file
+diff --git a/src/App.tsx b/src/App.tsx
+index 2aebe29..9bec609 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -1,14 +1,14 @@
++import React from 'react';
++import Index from './pages/Index';
++import { GlyphorBadge } from './utils/GlyphorBadge';
++
+ function App() {
+   return (
+-    <div className="flex min-h-screen items-center justify-center bg-black text-white">
+-      <div className="text-center">
+-        <h1 className="text-2xl font-bold tracking-tight text-zinc-500">
+-          Glyphor Fuse Skeleton
+-        </h1>
+-        <p className="mt-2 text-sm text-zinc-700">Waiting for generation...</p>
+-      </div>
++    <div className="relative min-h-screen bg-noir text-paper selection:bg-white selection:text-black">
++      <Index />
++      <GlyphorBadge />
+     </div>
+   );
+ }
+ 
+-export default App;
++export default App;
+\ No newline at end of file
+diff --git a/src/components/BigQuote.tsx b/src/components/BigQuote.tsx
+new file mode 100644
+index 0000000..13ae842
+--- /dev/null
++++ b/src/components/BigQuote.tsx
+@@ -0,0 +1,32 @@
++import { motion, useScroll, useTransform } from 'framer-motion';
++import { useRef } from 'react';
++
++export const BigQuote = () => {
++  const ref = useRef(null);
++  const { scrollYProgress } = useScroll({
++    target: ref,
++    offset: ["start end", "end start"]
++  });
++
++  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
++  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.3]);
++
++  return (
++    <section ref={ref} className="py-40 bg-noir flex items-center justify-center overflow-hidden">
++      <motion.div 
++        style={{ scale, opacity }}
++        className="max-w-5xl mx-auto px-6 text-center"
++      >
++        <p className="font-serif text-3xl md:text-5xl lg:text-7xl leading-tight text-white">
++          "Fashion is the armor to survive the reality of everyday life. We do not design for the moment, but for the memory."
++        </p>
++        <div className="mt-12 flex justify-center">
++          <div className="h-[1px] w-24 bg-white/30" />
++        </div>
++        <p className="mt-6 font-sans text-xs uppercase tracking-[0.3em] text-zinc-500">
++          Creative Director, Éther
++        </p>
++      </motion.div>
++    </section>
++  );
++};
+\ No newline at end of file
+diff --git a/src/components/Editorial.tsx b/src/components/Editorial.tsx
+new file mode 100644
+index 0000000..e0e4759
+--- /dev/null
++++ b/src/components/Editorial.tsx
+@@ -0,0 +1,95 @@
++import { motion } from 'framer-motion';
++
++export const Editorial = () => {
++  return (
++    <section className="relative py-32 px-6 md:px-12 bg-noir">
++      <div className="max-w-7xl mx-auto">
++        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
++          
++          {/* Text Column */}
++          <div className="lg:col-span-5 order-2 lg:order-1">
++            <motion.div
++              initial={{ opacity: 0, y: 40 }}
++              whileInView={{ opacity: 1, y: 0 }}
++              viewport={{ once: true, margin: "-10%" }}
++              transition={{ duration: 0.8 }}
++            >
++              <h2 className="font-display text-4xl md:text-6xl mb-8 leading-tight">
++                THE ARCHITECTURE <br/> <span className="font-serif italic font-light text-white/60">of Cloth</span>
++              </h2>
++              <p className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed mb-8">
++                We believe that fashion is not merely about covering the body, but about constructing a narrative. Every seam is a sentence, every texture a tone of voice. Our latest collection explores the structural integrity of softness.
++              </p>
++              <p className="text-base text-zinc-500 leading-relaxed mb-12">
++                Inspired by brutalist architecture and organic decay, the pieces stand as monuments to the fleeting nature of trends. We strip away the non-essential to reveal the stark beauty of form.
++              </p>
++              
++              <button className="group relative px-6 py-3 border border-white/20 hover:border-white/100 transition-colors duration-300">
++                <span className="relative z-10 text-sm uppercase tracking-widest group-hover:text-black transition-colors duration-300">Read the Manifesto</span>
++                <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out" />
++              </button>
++            </motion.div>
++          </div>
++
++          {/* Image Composition */}
++          <div className="lg:col-span-7 order-1 lg:order-2 relative">
++            <motion.div
++              initial={{ clipPath: 'inset(100% 0 0 0)' }}
++              whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
++              viewport={{ once: true }}
++              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
++              className="relative z-10"
++            >
++              <img 
++                src="<div className="relative">
++  <img 
++    src="https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
++    alt="A detailed shot of a crumpled black fabric, showcasing its smooth and wrinkled texture in a monochromatic tone."
++    width="4245"
++    height="6368"
++    className="w-full h-full object-cover"
++  />
++  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
++    <a href="https://www.pexels.com/photo/black-textile-with-creases-4814061/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
++      Photo by Karola G on Pexels
++    </a>
++  </div>
++</div>" 
++                alt="Fabric Detail"
++                className="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
++              />
++            </motion.div>
++            
++            <motion.div 
++              initial={{ opacity: 0, x: 20 }}
++              whileInView={{ opacity: 1, x: 0 }}
++              viewport={{ once: true }}
++              transition={{ delay: 0.4, duration: 0.8 }}
++              className="absolute -bottom-12 -left-12 w-64 h-80 z-20 hidden md:block"
++            >
++              <img 
++                src="<div className="relative">
++  <img 
++    src="https://images.pexels.com/photos/30720992/pexels-photo-30720992.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
++    alt="Close-up of a woman's neck and wrist adorned with elegant gold jewelry, showcasing minimalist fashion."
++    width="4160"
++    height="6240"
++    className="w-full h-full object-cover"
++  />
++  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
++    <a href="https://www.pexels.com/photo/elegant-gold-jewelry-on-woman-s-neck-and-wrist-30720992/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
++      Photo by Ayşegül Delice on Pexels
++    </a>
++  </div>
++</div>" 
++                alt="Detail Shot"
++                className="w-full h-full object-cover border-4 border-noir"
++              />
++            </motion.div>
++          </div>
++
++        </div>
++      </div>
++    </section>
++  );
++};
+\ No newline at end of file
+diff --git a/src/components/Footer.tsx b/src/components/Footer.tsx
+new file mode 100644
+index 0000000..1e20fa7
+--- /dev/null
++++ b/src/components/Footer.tsx
+@@ -0,0 +1,76 @@
++import { motion } from 'framer-motion';
++import { ArrowUpRight } from 'lucide-react';
++
++export const Footer = () => {
++  return (
++    <footer className="bg-zinc-950 pt-24 pb-12 px-6 border-t border-white/5">
++      <div className="max-w-[1800px] mx-auto">
++        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24 mb-24">
++          
++          <div className="space-y-6">
++            <h3 className="font-display text-2xl text-white">ÉTHER</h3>
++            <p className="text-zinc-500 text-sm leading-relaxed max-w-xs">
++              A digital atelier redefining the intersection of technology and haute couture. Based in Paris, shipping worldwide.
++            </p>
++          </div>
++
++          <div>
++            <h4 className="font-sans text-xs uppercase tracking-widest text-white/40 mb-8">Collections</h4>
++            <ul className="space-y-4">
++              {['Spring / Summer 25', 'Autumn / Winter 24', 'Archive', 'Accessories'].map((item) => (
++                <li key={item}>
++                  <a href="#" className="text-zinc-400 hover:text-white transition-colors text-sm flex items-center gap-2 group">
++                    {item}
++                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
++                  </a>
++                </li>
++              ))}
++            </ul>
++          </div>
++
++          <div>
++            <h4 className="font-sans text-xs uppercase tracking-widest text-white/40 mb-8">Legal</h4>
++            <ul className="space-y-4">
++              {['Privacy Policy', 'Terms of Service', 'Shipping & Returns', 'Sustainability'].map((item) => (
++                <li key={item}>
++                  <a href="#" className="text-zinc-400 hover:text-white transition-colors text-sm">
++                    {item}
++                  </a>
++                </li>
++              ))}
++            </ul>
++          </div>
++
++          <div>
++            <h4 className="font-sans text-xs uppercase tracking-widest text-white/40 mb-8">Newsletter</h4>
++            <form className="space-y-4">
++              <div className="relative">
++                <input 
++                  type="email" 
++                  placeholder="Email Address" 
++                  className="w-full bg-transparent border-b border-white/20 py-2 text-white placeholder-zinc-700 focus:outline-none focus:border-white transition-colors"
++                />
++                <button type="submit" className="absolute right-0 top-2 text-xs uppercase tracking-widest text-white hover:text-zinc-400">
++                  Join
++                </button>
++              </div>
++              <p className="text-zinc-600 text-xs">
++                Subscribe for exclusive access to drops and editorials.
++              </p>
++            </form>
++          </div>
++        </div>
++
++        <div className="flex flex-col md:flex-row justify-between items-end pt-12 border-t border-white/5">
++          <h2 className="font-display text-[15vw] leading-none text-zinc-900 select-none pointer-events-none">
++            ÉTHER
++          </h2>
++          <div className="flex gap-8 pb-4 md:pb-8">
++            <span className="text-zinc-600 text-xs">© 2024 ÉTHER STUDIOS</span>
++            <span className="text-zinc-600 text-xs">PARIS — TOKYO — NY</span>
++          </div>
++        </div>
++      </div>
++    </footer>
++  );
++};
+\ No newline at end of file
+diff --git a/src/components/Hero.tsx b/src/components/Hero.tsx
+new file mode 100644
+index 0000000..b811c95
+--- /dev/null
++++ b/src/components/Hero.tsx
+@@ -0,0 +1,99 @@
++import { motion, useScroll, useTransform } from 'framer-motion';
++import { ArrowRight } from 'lucide-react';
++import { useRef } from 'react';
++
++export const Hero = () => {
++  const containerRef = useRef(null);
++  const { scrollYProgress } = useScroll({
++    target: containerRef,
++    offset: ["start start", "end start"]
++  });
++
++  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
++  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
++
++  return (
++    <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center">
++      {/* Background Image Parallax */}
++      <motion.div 
++        style={{ y }}
++        className="absolute inset-0 z-0"
++      >
++        <div className="absolute inset-0 bg-black/30 z-10" />
++        <img 
++          src="<div className="relative">
++  <img 
++    src="https://images.pexels.com/photos/32848906/pexels-photo-32848906.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
++    alt="Avant-garde fashion model poses in a forest, blending style with nature."
++    width="4160"
++    height="6240"
++    className="w-full h-full object-cover"
++  />
++  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
++    <a href="https://www.pexels.com/photo/avant-garde-fashion-model-in-natural-setting-32848906/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
++      Photo by Eyüpcan Timur on Pexels
++    </a>
++  </div>
++</div>" 
++          alt="Hero Fashion"
++          className="w-full h-full object-cover object-center scale-110"
++        />
++      </motion.div>
++
++      {/* Main Content */}
++      <motion.div 
++        style={{ opacity }}
++        className="relative z-20 flex flex-col items-center text-center px-4"
++      >
++        <motion.span 
++          initial={{ opacity: 0, y: 20 }}
++          animate={{ opacity: 1, y: 0 }}
++          transition={{ delay: 0.5, duration: 0.8 }}
++          className="font-sans text-sm md:text-base uppercase tracking-[0.5em] mb-6 text-white/80"
++        >
++          Spring / Summer 2025
++        </motion.span>
++        
++        <div className="overflow-hidden">
++          <motion.h1 
++            initial={{ y: "100%" }}
++            animate={{ y: 0 }}
++            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
++            className="font-display text-6xl md:text-9xl lg:text-[12rem] leading-none text-white mix-blend-overlay"
++          >
++            SILHOUETTE
++          </motion.h1>
++        </div>
++        
++        <div className="overflow-hidden mt-4">
++          <motion.p 
++            initial={{ y: "100%" }}
++            animate={{ y: 0 }}
++            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
++            className="font-serif italic text-2xl md:text-4xl text-white/90"
++          >
++            redefining the ephemeral
++          </motion.p>
++        </div>
++
++        <motion.div
++          initial={{ opacity: 0 }}
++          animate={{ opacity: 1 }}
++          transition={{ delay: 1, duration: 1 }}
++          className="absolute bottom-12 left-0 right-0 flex justify-center"
++        >
++          <div className="flex flex-col items-center gap-2">
++            <span className="text-[10px] uppercase tracking-widest text-white/60">Scroll to Explore</span>
++            <div className="w-[1px] h-12 bg-white/20 overflow-hidden">
++              <motion.div 
++                animate={{ y: ["-100%", "100%"] }}
++                transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
++                className="w-full h-full bg-white"
++              />
++            </div>
++          </div>
++        </motion.div>
++      </motion.div>
++    </section>
++  );
++};
+\ No newline at end of file
+diff --git a/src/components/Lookbook.tsx b/src/components/Lookbook.tsx
+new file mode 100644
+index 0000000..a5f83f1
+--- /dev/null
++++ b/src/components/Lookbook.tsx
+@@ -0,0 +1,129 @@
++import { motion } from 'framer-motion';
++import { ArrowRight } from 'lucide-react';
++
++const looks = [
++  {
++    id: 1,
++    title: "The Void Coat",
++    img: "<div className="relative">
++  <img 
++    src="https://images.pexels.com/photos/20478304/pexels-photo-20478304.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
++    alt="Artistic portrait of a woman in a black coat captured in a studio with dramatic lighting."
++    width="6421"
++    height="8990"
++    className="w-full h-full object-cover"
++  />
++  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
++    <a href="https://www.pexels.com/photo/woman-hiding-behind-large-black-coat-20478304/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
++      Photo by YI REN on Pexels
++    </a>
++  </div>
++</div>",
++    price: "€2,400"
++  },
++  {
++    id: 2,
++    title: "Nebula Dress",
++    img: "<div className="relative">
++  <img 
++    src="https://images.pexels.com/photos/31771373/pexels-photo-31771373.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
++    alt="Striking silhouette of a woman with a fan, wearing a red dress, set against a bright window backdrop."
++    width="3833"
++    height="5750"
++    className="w-full h-full object-cover"
++  />
++  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
++    <a href="https://www.pexels.com/photo/silhouette-of-woman-with-fan-in-red-dress-31771373/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
++      Photo by Nacho Gomez on Pexels
++    </a>
++  </div>
++</div>",
++    price: "€3,100"
++  },
++  {
++    id: 3,
++    title: "Carbon Trousers",
++    img: "<div className="relative">
++  <img 
++    src="https://images.pexels.com/photos/6046228/pexels-photo-6046228.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
++    alt="Brown peculiar pants with bows and laces at bottom on white background in studio"
++    width="2333"
++    height="3522"
++    className="w-full h-full object-cover"
++  />
++  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
++    <a href="https://www.pexels.com/photo/fashionable-trousers-with-creative-design-in-studio-6046228/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
++      Photo by Skylar Kang on Pexels
++    </a>
++  </div>
++</div>",
++    price: "€950"
++  },
++  {
++    id: 4,
++    title: "Onyx Blouse",
++    img: "<div className="relative">
++  <img 
++    src="https://images.pexels.com/photos/4920012/pexels-photo-4920012.png?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
++    alt="A stylish portrait of an adult in a sheer black outfit against a cloudy sky backdrop."
++    width="3000"
++    height="4496"
++    className="w-full h-full object-cover"
++  />
++  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
++    <a href="https://www.pexels.com/photo/a-man-wearing-a-black-sheer-top-4920012/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
++      Photo by JC Cantila on Pexels
++    </a>
++  </div>
++</div>",
++    price: "€1,200"
++  }
++];
++
++export const Lookbook = () => {
++  return (
++    <section className="py-32 bg-white text-black px-6">
++      <div className="max-w-[1800px] mx-auto">
++        <div className="flex justify-between items-end mb-16 border-b border-black/10 pb-8">
++          <div>
++            <span className="block text-xs uppercase tracking-widest mb-2 text-zinc-500">Collection 04</span>
++            <h2 className="font-display text-5xl md:text-7xl">LOOKBOOK</h2>
++          </div>
++          <button className="hidden md:flex items-center gap-2 text-sm uppercase tracking-widest hover:gap-4 transition-all">
++            View All Looks <ArrowRight className="w-4 h-4" />
++          </button>
++        </div>
++
++        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
++          {looks.map((look, index) => (
++            <motion.div
++              key={look.id}
++              initial={{ opacity: 0, y: 20 }}
++              whileInView={{ opacity: 1, y: 0 }}
++              viewport={{ once: true }}
++              transition={{ delay: index * 0.1, duration: 0.6 }}
++              className="group cursor-pointer"
++            >
++              <div className="relative overflow-hidden mb-4 aspect-[3/4]">
++                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10" />
++                <img 
++                  src={look.img} 
++                  alt={look.title}
++                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
++                />
++                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-20 flex justify-between items-center bg-white/90 backdrop-blur-sm">
++                  <span className="uppercase text-xs tracking-widest font-bold">Quick Shop</span>
++                  <ArrowRight className="w-4 h-4" />
++                </div>
++              </div>
++              <div className="flex justify-between items-baseline px-1">
++                <h3 className="font-serif text-xl italic group-hover:text-zinc-600 transition-colors">{look.title}</h3>
++                <span className="font-sans text-sm font-medium text-zinc-400">{look.price}</span>
++              </div>
++            </motion.div>
++          ))}
++        </div>
++      </div>
++    </section>
++  );
++};
+\ No newline at end of file
+diff --git a/src/components/Marquee.tsx b/src/components/Marquee.tsx
+new file mode 100644
+index 0000000..9ba3b05
+--- /dev/null
++++ b/src/components/Marquee.tsx
+@@ -0,0 +1,29 @@
++import { motion } from 'framer-motion';
++
++export const Marquee = () => {
++  return (
++    <div className="py-24 overflow-hidden border-y border-white/10 bg-zinc-950">
++      <motion.div 
++        className="flex whitespace-nowrap"
++        animate={{ x: ["0%", "-50%"] }}
++        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
++      >
++        {Array.from({ length: 4 }).map((_, i) => (
++          <div key={i} className="flex items-center gap-16 px-8">
++            <span className="font-display text-8xl md:text-[10rem] text-transparent stroke-text leading-none opacity-30">
++              AVANT GARDE
++            </span>
++            <span className="font-serif italic text-6xl md:text-8xl text-white/80">
++              2025
++            </span>
++          </div>
++        ))}
++      </motion.div>
++      <style>{`
++        .stroke-text {
++          -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5);
++        }
++      `}</style>
++    </div>
++  );
++};
+\ No newline at end of file
+diff --git a/src/components/Navbar.tsx b/src/components/Navbar.tsx
+new file mode 100644
+index 0000000..235e0bf
+--- /dev/null
++++ b/src/components/Navbar.tsx
+@@ -0,0 +1,33 @@
++import { motion } from 'framer-motion';
++import { Menu, Search, ShoppingBag } from 'lucide-react';
++
++export const Navbar = () => {
++  return (
++    <motion.nav 
++      initial={{ y: -100 }}
++      animate={{ y: 0 }}
++      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
++      className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-6 py-6 mix-blend-difference text-white"
++    >
++      <div className="flex items-center gap-6">
++        <button className="group flex items-center gap-2 text-sm uppercase tracking-widest hover:opacity-70 transition-opacity">
++          <Menu className="w-5 h-5" />
++          <span className="hidden md:inline-block">Menu</span>
++        </button>
++      </div>
++
++      <div className="absolute left-1/2 -translate-x-1/2">
++        <h1 className="font-display text-2xl font-bold tracking-[0.2em]">ÉTHER</h1>
++      </div>
++
++      <div className="flex items-center gap-6">
++        <button className="hover:opacity-70 transition-opacity">
++          <Search className="w-5 h-5" />
++        </button>
++        <button className="hover:opacity-70 transition-opacity">
++          <ShoppingBag className="w-5 h-5" />
++        </button>
++      </div>
++    </motion.nav>
++  );
++};
+\ No newline at end of file
+diff --git a/src/index.css b/src/index.css
+index f1d8c73..d9e44a9 100644
+--- a/src/index.css
++++ b/src/index.css
+@@ -1 +1,36 @@
+ @import "tailwindcss";
++
++@theme {
++  --font-sans: 'Inter', system-ui, sans-serif;
++  --font-serif: 'Playfair Display', serif;
++  --font-display: 'Cinzel', serif;
++  
++  --color-noir: #050505;
++  --color-paper: #f0f0f0;
++  --color-accent: #b91c1c; /* Deep red for subtle interactions */
++}
++
++/* Custom Scrollbar for Chrome/Safari/Webkit */
++::-webkit-scrollbar {
++  width: 6px;
++}
++::-webkit-scrollbar-track {
++  background: var(--color-noir);
++}
++::-webkit-scrollbar-thumb {
++  background: #333;
++  border-radius: 3px;
++}
++
++body {
++  background-color: var(--color-noir);
++  color: var(--color-paper);
++  font-family: var(--font-sans);
++  overflow-x: hidden;
++  -webkit-font-smoothing: antialiased;
++}
++
++::selection {
++  background: var(--color-paper);
++  color: var(--color-noir);
++}
+\ No newline at end of file
+diff --git a/src/pages/Index.tsx b/src/pages/Index.tsx
+new file mode 100644
+index 0000000..d7b61c7
+--- /dev/null
++++ b/src/pages/Index.tsx
+@@ -0,0 +1,26 @@
++import React from 'react';
++import { Navbar } from '../components/Navbar';
++import { Hero } from '../components/Hero';
++import { Editorial } from '../components/Editorial';
++import { Marquee } from '../components/Marquee';
++import { Lookbook } from '../components/Lookbook';
++import { BigQuote } from '../components/BigQuote';
++import { Footer } from '../components/Footer';
++
++const Index = () => {
++  return (
++    <>
++      <Navbar />
++      <main className="w-full">
++        <Hero />
++        <Editorial />
++        <Marquee />
++        <Lookbook />
++        <BigQuote />
++        <Footer />
++      </main>
++    </>
++  );
++};
++
++export default Index;
+\ No newline at end of file
+diff --git a/src/utils/GlyphorBadge.tsx b/src/utils/GlyphorBadge.tsx
+new file mode 100644
+index 0000000..bf74564
+--- /dev/null
++++ b/src/utils/GlyphorBadge.tsx
+@@ -0,0 +1,15 @@
++import React from 'react';
++
++export const GlyphorBadge = () => {
++  return (
++    <a
++      href="https://glyphor.com"
++      target="_blank"
++      rel="noopener noreferrer"
++      className="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-3 py-2 bg-black/80 backdrop-blur-md border border-white/10 rounded-full text-xs text-white/70 hover:text-white transition-colors shadow-lg"
++    >
++      <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
++      <span>Made with Glyphor</span>
++    </a>
++  );
++};
+\ No newline at end of file
