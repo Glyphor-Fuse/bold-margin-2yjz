@@ -5,77 +5,25 @@ const looks = [
   {
     id: 1,
     title: "The Void Coat",
-    img: "<div className="relative">
-  <img 
-    src="https://images.pexels.com/photos/20478304/pexels-photo-20478304.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
-    alt="Artistic portrait of a woman in a black coat captured in a studio with dramatic lighting."
-    width="6421"
-    height="8990"
-    className="w-full h-full object-cover"
-  />
-  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
-    <a href="https://www.pexels.com/photo/woman-hiding-behind-large-black-coat-20478304/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
-      Photo by YI REN on Pexels
-    </a>
-  </div>
-</div>",
+    img: "https://images.pexels.com/photos/20478304/pexels-photo-20478304.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
     price: "€2,400"
   },
   {
     id: 2,
     title: "Nebula Dress",
-    img: "<div className="relative">
-  <img 
-    src="https://images.pexels.com/photos/31771373/pexels-photo-31771373.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
-    alt="Striking silhouette of a woman with a fan, wearing a red dress, set against a bright window backdrop."
-    width="3833"
-    height="5750"
-    className="w-full h-full object-cover"
-  />
-  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
-    <a href="https://www.pexels.com/photo/silhouette-of-woman-with-fan-in-red-dress-31771373/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
-      Photo by Nacho Gomez on Pexels
-    </a>
-  </div>
-</div>",
+    img: "https://images.pexels.com/photos/31771373/pexels-photo-31771373.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
     price: "€3,100"
   },
   {
     id: 3,
     title: "Carbon Trousers",
-    img: "<div className="relative">
-  <img 
-    src="https://images.pexels.com/photos/6046228/pexels-photo-6046228.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
-    alt="Brown peculiar pants with bows and laces at bottom on white background in studio"
-    width="2333"
-    height="3522"
-    className="w-full h-full object-cover"
-  />
-  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
-    <a href="https://www.pexels.com/photo/fashionable-trousers-with-creative-design-in-studio-6046228/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
-      Photo by Skylar Kang on Pexels
-    </a>
-  </div>
-</div>",
+    img: "https://images.pexels.com/photos/6046228/pexels-photo-6046228.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
     price: "€950"
   },
   {
     id: 4,
     title: "Onyx Blouse",
-    img: "<div className="relative">
-  <img 
-    src="https://images.pexels.com/photos/4920012/pexels-photo-4920012.png?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
-    alt="A stylish portrait of an adult in a sheer black outfit against a cloudy sky backdrop."
-    width="3000"
-    height="4496"
-    className="w-full h-full object-cover"
-  />
-  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
-    <a href="https://www.pexels.com/photo/a-man-wearing-a-black-sheer-top-4920012/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
-      Photo by JC Cantila on Pexels
-    </a>
-  </div>
-</div>",
+    img: "https://images.pexels.com/photos/4920012/pexels-photo-4920012.png?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
     price: "€1,200"
   }
 ];

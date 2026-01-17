@@ -41,20 +41,7 @@ export const Editorial = () => {
               className="relative z-10"
             >
               <img 
-                src="<div className="relative">
-  <img 
-    src="https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
-    alt="A detailed shot of a crumpled black fabric, showcasing its smooth and wrinkled texture in a monochromatic tone."
-    width="4245"
-    height="6368"
-    className="w-full h-full object-cover"
-  />
-  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
-    <a href="https://www.pexels.com/photo/black-textile-with-creases-4814061/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
-      Photo by Karola G on Pexels
-    </a>
-  </div>
-</div>" 
+                src="https://images.pexels.com/photos/4814061/pexels-photo-4814061.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
                 alt="Fabric Detail"
                 className="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
@@ -68,20 +55,7 @@ export const Editorial = () => {
               className="absolute -bottom-12 -left-12 w-64 h-80 z-20 hidden md:block"
             >
               <img 
-                src="<div className="relative">
-  <img 
-    src="https://images.pexels.com/photos/30720992/pexels-photo-30720992.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
-    alt="Close-up of a woman's neck and wrist adorned with elegant gold jewelry, showcasing minimalist fashion."
-    width="4160"
-    height="6240"
-    className="w-full h-full object-cover"
-  />
-  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-2">
-    <a href="https://www.pexels.com/photo/elegant-gold-jewelry-on-woman-s-neck-and-wrist-30720992/" target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-slate-300 transition-colors">
-      Photo by Ayşegül Delice on Pexels
-    </a>
-  </div>
-</div>" 
+                src="https://images.pexels.com/photos/30720992/pexels-photo-30720992.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800" 
                 alt="Detail Shot"
                 className="w-full h-full object-cover border-4 border-noir"
               />
